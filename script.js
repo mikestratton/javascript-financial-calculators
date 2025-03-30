@@ -192,4 +192,36 @@ function clearDti(){
     document.getElementById("result").textContent = "";
 }
 
-// HTML Example:
+function calculateROI(investment, gain) {
+    if (isNaN(investment) || isNaN(gain) || investment === 0) {
+        return "Invalid input"; // Handle invalid input
+    }
+
+    const roi = ((gain - investment) / investment) * 100;
+    return roi.toFixed(2); // Return ROI as a percentage with 2 decimal places
+}
+
+function displayROI() {
+    const investmentInput = document.getElementById("investment").value;
+    const gainInput = document.getElementById("gain").value;
+
+    const investment = parseFloat(investmentInput);
+    const gain = parseFloat(gainInput);
+
+    const roi = calculateROI(investment, gain);
+
+    const resultElement = document.getElementById("result");
+
+    if (typeof roi === "string") {
+        resultElement.textContent = roi; // Display error message
+    } else {
+        resultElement.textContent = "Return on Investment (ROI): " + roi + "%";
+    }
+}
+
+function clearROI(){
+    document.getElementById("investment").value = "";
+    document.getElementById("gain").value = "";
+    document.getElementById("result").textContent = "";
+}
+
