@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mortgage Calculator</title>
+</head>
+<body>
+<h1>Mortgage Calculator</h1>
+
+<label for="principal">Principal (Loan Amount):</label>
+<input type="number" id="principal" value="200000"><br><br>
+
+<label for="interestRate">Annual Interest Rate (%):</label>
+<input type="number" id="interestRate" value="5"><br><br>
+
+<label for="loanTerm">Loan Term (Years):</label>
+<input type="number" id="loanTerm" value="30"><br><br>
+
+<button onclick="displayMortgageResults()">Calculate</button>
+<button onclick="clearResults()">Clear</button><br><br>
+
+<div id="results"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

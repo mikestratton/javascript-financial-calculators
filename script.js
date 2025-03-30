@@ -103,3 +103,60 @@ function displayAPR(){
         document.getElementById("result").innerHTML = "Could not calculate APR.";
     }
 }
+
+function calculateMortgage(principal, interestRate, loanTerm) {
+    // Convert annual interest rate to monthly
+    const monthlyInterestRate = interestRate / 100 / 12;
+
+    // Convert loan term to months
+    const numberOfPayments = loanTerm * 12;
+
+    // Calculate monthly mortgage payment
+    const monthlyPayment =
+        (principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+        (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+
+    // Calculate total payment
+    const totalPayment = monthlyPayment * numberOfPayments;
+
+    // Calculate total interest paid
+    const totalInterest = totalPayment - principal;
+
+    return {
+        monthlyPayment: monthlyPayment,
+        totalPayment: totalPayment,
+        totalInterest: totalInterest,
+    };
+}
+
+function displayMortgageResults() {
+    const principal = parseFloat(document.getElementById("principal").value);
+    const interestRate = parseFloat(document.getElementById("interestRate").value);
+    const loanTerm = parseInt(document.getElementById("loanTerm").value);
+
+    if (isNaN(principal) || isNaN(interestRate) || isNaN(loanTerm) || principal <= 0 || interestRate < 0 || loanTerm <= 0) {
+        document.getElementById("results").innerHTML = "<p style='color:red;'>Please enter valid positive numbers.</p>";
+        return;
+    }
+
+    const results = calculateMortgage(principal, interestRate, loanTerm);
+
+    if (results) {
+        document.getElementById("results").innerHTML = `
+      <p>Monthly Payment: $${results.monthlyPayment.toFixed(2)}</p>
+      <p>Total Payment: $${results.totalPayment.toFixed(2)}</p>
+      <p>Total Interest Paid: $${results.totalInterest.toFixed(2)}</p>
+    `;
+    } else {
+        document.getElementById("results").innerHTML = "<p>Invalid input.</p>";
+    }
+}
+
+//HTML Example.
+
+function clearResults(){
+    document.getElementById("principal").value = "";
+    document.getElementById("interestRate").value = "";
+    document.getElementById("loanTerm").value = "";
+    document.getElementById("results").innerHTML = "";
+}
