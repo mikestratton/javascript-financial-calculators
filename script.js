@@ -152,11 +152,44 @@ function displayMortgageResults() {
     }
 }
 
-//HTML Example.
-
 function clearResults(){
     document.getElementById("principal").value = "";
     document.getElementById("interestRate").value = "";
     document.getElementById("loanTerm").value = "";
     document.getElementById("results").innerHTML = "";
 }
+
+function calculateDebtToIncomeRatio(monthlyDebt, monthlyIncome) {
+    if (isNaN(monthlyDebt) || isNaN(monthlyIncome) || monthlyIncome === 0) {
+        return "Invalid input"; // Handle invalid input
+    }
+
+    const debtToIncomeRatio = (monthlyDebt / monthlyIncome) * 100;
+    return debtToIncomeRatio.toFixed(2); // Return ratio as a percentage with 2 decimal places
+}
+
+function displayDtiRatio() {
+    const monthlyDebtInput = document.getElementById("monthlyDebt").value;
+    const monthlyIncomeInput = document.getElementById("monthlyIncome").value;
+
+    const monthlyDebt = parseFloat(monthlyDebtInput);
+    const monthlyIncome = parseFloat(monthlyIncomeInput);
+
+    const dtiRatio = calculateDebtToIncomeRatio(monthlyDebt, monthlyIncome);
+
+    const resultElement = document.getElementById("result");
+
+    if (typeof dtiRatio === "string") {
+        resultElement.textContent = dtiRatio; // Display error message
+    } else {
+        resultElement.textContent = "Debt-to-Income Ratio: " + dtiRatio + "%";
+    }
+}
+
+function clearDti(){
+    document.getElementById("monthlyDebt").value = "";
+    document.getElementById("monthlyIncome").value = "";
+    document.getElementById("result").textContent = "";
+}
+
+// HTML Example:
