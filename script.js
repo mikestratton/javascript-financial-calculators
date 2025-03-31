@@ -251,3 +251,27 @@ function calculateInterestRate() {
                 <p>Total Interest: $${interest.toFixed(2)}</p>
             `;
 }
+
+// script.js
+
+document.getElementById('calculateButton').addEventListener('click', calculateCurrentRatio);
+
+function calculateCurrentRatio() {
+    const currentAssets = parseFloat(document.getElementById('currentAssets').value);
+    const currentLiabilities = parseFloat(document.getElementById('currentLiabilities').value);
+    const resultDiv = document.getElementById('result');
+
+    if (isNaN(currentAssets) || isNaN(currentLiabilities)) {
+        resultDiv.innerHTML = "<p style='color:red;'>Please enter valid numbers.</p>";
+        return;
+    }
+
+    if (currentLiabilities === 0) {
+        resultDiv.innerHTML = "<p style='color:red;'>Current liabilities cannot be zero.</p>";
+        return;
+    }
+
+    const currentRatio = currentAssets / currentLiabilities;
+
+    resultDiv.innerHTML = `<p>Current Ratio: ${currentRatio.toFixed(2)}</p>`;
+}
