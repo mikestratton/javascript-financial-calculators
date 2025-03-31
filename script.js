@@ -275,3 +275,26 @@ function calculateCurrentRatio() {
 
     resultDiv.innerHTML = `<p>Current Ratio: ${currentRatio.toFixed(2)}</p>`;
 }
+
+document.getElementById('calculateButton').addEventListener('click', calculateQuickRatio);
+
+function calculateQuickRatio() {
+    const currentAssets = parseFloat(document.getElementById('currentAssets').value);
+    const inventory = parseFloat(document.getElementById('inventory').value);
+    const currentLiabilities = parseFloat(document.getElementById('currentLiabilities').value);
+    const resultDiv = document.getElementById('result');
+
+    if (isNaN(currentAssets) || isNaN(inventory) || isNaN(currentLiabilities)) {
+        resultDiv.innerHTML = "<p style='color:red;'>Please enter valid numbers.</p>";
+        return;
+    }
+
+    if (currentLiabilities === 0) {
+        resultDiv.innerHTML = "<p style='color:red;'>Current liabilities cannot be zero.</p>";
+        return;
+    }
+
+    const quickRatio = (currentAssets - inventory) / currentLiabilities;
+
+    resultDiv.innerHTML = `<p>Quick Ratio: ${quickRatio.toFixed(2)}:1</p>`; // Corrected output format
+}
