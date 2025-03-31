@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interest Rate Calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .calculator {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    .calculator label, .calculator input, .calculator select, .calculator button {
+      display: block;
+      width: calc(100% - 12px);
+      margin-bottom: 10px;
+      padding: 6px;
+      box-sizing: border-box;
+    }
+
+    .calculator button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 15px;
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="calculator">
+  <h2>Interest Rate Calculator</h2>
+  <label for="principal">Principal Amount:</label>
+  <input type="number" id="principal" value="1000">
+
+  <label for="rate">Annual Interest Rate (%):</label>
+  <input type="number" id="rate" value="5">
+
+  <label for="time">Time (Years):</label>
+  <input type="number" id="time" value="5">
+
+  <label for="compoundFrequency">Compound Frequency:</label>
+  <select id="compoundFrequency">
+    <option value="1">Annually</option>
+    <option value="2">Semi-Annually</option>
+    <option value="4">Quarterly</option>
+    <option value="12">Monthly</option>
+    <option value="0">Simple Interest</option>
+  </select>
+
+  <button onclick="calculateInterestRate()">Calculate</button>
+
+  <div id="result"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

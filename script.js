@@ -225,3 +225,29 @@ function clearROI(){
     document.getElementById("result").textContent = "";
 }
 
+function calculateInterestRate() {
+    const principal = parseFloat(document.getElementById('principal').value);
+    const rate = parseFloat(document.getElementById('rate').value) / 100; // Convert percentage to decimal
+    const time = parseFloat(document.getElementById('time').value);
+    const compoundFrequency = parseInt(document.getElementById('compoundFrequency').value);
+
+    if (isNaN(principal) || isNaN(rate) || isNaN(time) || isNaN(compoundFrequency) || principal < 0 || rate < 0 || time < 0 || (compoundFrequency < 0)) {
+        document.getElementById('result').innerHTML = "<p style='color:red;'>Invalid input.</p>";
+        return;
+    }
+
+    let amount, interest;
+
+    if (compoundFrequency === 0) { // Simple interest
+        amount = principal * (1 + rate * time);
+        interest = principal * rate * time;
+    } else { // Compound interest
+        amount = principal * Math.pow(1 + rate / compoundFrequency, compoundFrequency * time);
+        interest = amount - principal;
+    }
+
+    document.getElementById('result').innerHTML = `
+                <p>Final Amount: $${amount.toFixed(2)}</p>
+                <p>Total Interest: $${interest.toFixed(2)}</p>
+            `;
+}
